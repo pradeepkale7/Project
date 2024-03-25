@@ -14,13 +14,13 @@
   <body>
     <div class="container" id="container">
       <div class="form-container sign-up-container">
-        <form action="#">
+        <form action="/Register"  method="POST">
           <h1 id="vit">Files</h1>
 
-          <input type="text" placeholder="Name" id="name" />
-          <input type="email" placeholder="Email" id="mail" />
-          <input type="password" placeholder="Password" id="pass" />
-          <button>Sign Up</button>
+          <input type="text" placeholder="Name" id="name" name="name"/>
+          <input type="email" placeholder="Email" id="mail" name="email" />
+          <input type="password" placeholder="Password" id="pass" name="password" />
+          <button type="submit">Sign Up</button>
           <br /><br /><br /><br />
 
           <div class="social-container">
@@ -40,12 +40,12 @@
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form action="#">
+        <form action="/login"  method="POST">
           <h1>Sign In</h1>
 
-          <input type="email" placeholder="Email" id="mail" />
-          <input type="password" placeholder="Password" id="pass" />
-          <button>Log In</button>
+          <input name="email" type="email" placeholder="Email" id="mail" />
+          <input name="password" type="password" placeholder="Password" id="pass" />
+          <button type="submit">Log In</button>
           <br /><br /><br /><br /><br /><br />
 
           <div class="social-container">
