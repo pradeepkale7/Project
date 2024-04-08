@@ -8,7 +8,7 @@
 
 body {
   image-rendering: pixelated;
-  background-image: url('/back.jpg');
+  background-image: url('back.jpg');
   /* Replace '/path/to/your/background/image.jpg' with the actual path to your background image */
   background-size: cover;
   display: flex;

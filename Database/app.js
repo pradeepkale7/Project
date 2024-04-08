@@ -41,8 +41,14 @@ const dbConfig = {
     });
 
     //it is for cheking the login ;
-    app.get("/Login", (req, res) => {
+    app.get("/login", (req, res) => {
       const filePath = path.join(__dirname, "views", "proj.html");
+      res.sendFile(filePath); // Send the HTML file
+    });
+
+      // it is for the after login 
+    app.get("/main", (req, res) => {
+      const filePath = path.join(__dirname, "public", "sidebar-menu-submenus","navbar.html");
       res.sendFile(filePath); // Send the HTML file
     });
 
@@ -107,7 +113,7 @@ const dbConfig = {
         if (isPasswordValid) {
           // Login successful (consider creating a session or token for authentication)
          // res.send("Login successful!"); // Replace with appropriate response
-          res.redirect('/Home');
+          res.redirect('/main');
         } else {
           res.status(401).send("Invalid email or password");
         }

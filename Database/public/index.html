@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login Page with Background Image Example</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Management - Add Event</title>
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
-<!-- partial:index.partial.html -->
-<div id="bg"></div>
+    <h1>Add a New Event</h1>
 
-<form action="/login" method="post">
-  <div class="form-field">
-    <input name="username" type="email" placeholder="Email / Username" required/>
-  </div>
-  
-  <div class="form-field">
-    <input name =password type="password" placeholder="Password" required/>                         </div>
-  
-  <div class="form-field">
-    <button class="btn" type="submit">Log in</button>
-  </div>
-</form>
-<!-- partial -->
-  
-</body>
+    <form id="event-form">
+        <div class="form-group">
+            <label for="event-title">Event Title:</label>
+            <input type="text" id="event-title" name="eventTitle" required>
+        </div>
+        <div class="form-group">
+            <label for="event-description">Event Description:</label>
+            <textarea id="event-description" name="eventDescription" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="event-category">Event Category:</label>
+            <select id="event-category" name="eventCategory" required>
+                <option value="">Select Category</option>
+                <option value="cultural">Cultural</option>
+                <option value="academic">Academic</option>
+                <option value="sports">Sports</option>
+                <option value="workshop">Workshop</option>
+                </select>
+        </div>
+        <div class="form-group">
+            <label for="event-date">Event Date:</label>
+            <input type="date" id="event-date" name="eventDate" required>
+        </div>
+        <div class="form-group">
+            <label for="event-time">Event Time:</label>
+            <input type="time" id="event-time" name="eventTime" required>
+        </div>
+        <div class="form-group">
+            <label for="event-location">Event Location:</label>
+            <input type="text" id="event-location" name="eventLocation" required>
+        </div>
+        <div class="form-group">
+            <label for="event-speaker">Speaker (Optional):</label>
+            <input type="text" id="event-speaker" name="eventSpeaker">
+        </div>
+        <div class="form-group">
+            <label for="event-image">Event Image (Optional):</label>
+            <input type="file" id="event-image" name="eventImage">
+        </div>
+        <button type="submit">Add Event</button>
+    </form>
+
+    <script src="script.js"></script> </body>
 </html>
