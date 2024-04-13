@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Management</title>
+  <script>
+    async function fetchDocuments() {
+      const response = await fetch('/all-documents');
+      const documents = await response.json();
+
+      const documentList = document.getElementById('documentList');
+      documentList.innerHTML = ''; // Clear existing content
+
+      documents.forEach(document => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <a href="/documents/${document.DocumentID}">${document.DocumentName}</a> (Uploaded by: ${document.UploadedBy})
+        `;
+        documentList.appendChild(listItem);
+      });
+    }
+
+    window.onload = fetchDocuments; // Fetch documents on page load
+  </script>
+</head>
+<body>
+  <h1>Document Management</h1>
+  <button onclick="fetchDocuments()">View All Documents</button>
+  <ul id="documentList"></ul>
+
+  </body>
+</html>

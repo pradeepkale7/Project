@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Section</title>
+    <style>
+   body {
+  font-family: Arial, sans-serif;
+}
+
+#fileList {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.file-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+.file-item:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <h1>Uploaded</h1>
+    <div>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="fileInput" id="fileInput">
+            <button type="submit">Upload</button>
+          </form>
+          <div id="fileList"></div>
+    </div>
+
+    <div>
+        <h1>Uploaded Files </h1>
+        <div id="showfile">
+
+        </div>
+    </div>
+    
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const uploadForm = document.getElementById("uploadForm");
+  const fileListDiv = document.getElementById("fileList");
+
+  // Submit form event listener
+  uploadForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const formData = new FormData(uploadForm);
+    
+    // Make a POST request to upload the file
+    fetch("/upload", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(file => {
+      // Display file details after successful upload
+      const fileItem = document.createElement('div');
+      fileItem.textContent = `File Name: ${file.name}, Size: ${file.size} bytes`;
+      fileListDiv.appendChild(fileItem);
+    })
+    .catch(error => {
+      console.error('Error uploading file:', error);
+    });
+  });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Files</title>
+<style>
+  .main{
+    display: inline;
+    align-items: flex-end;
+    border: gold;
+    margin: 10px;
+    padding: 10px;
+  }
+  .first{
+    background-color: aqua;
+  }
+  .second{
+    background-color: blue;
+  }
+      #fileList {
+      list-style: none;
+      padding: 0;
+    }
+
+    #fileList li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    #fileList li i {
+      margin-right: 10px;
+      color: #333; /* Adjust icon color as needed */
+    }
+</style>
+</head>
+<body>
+  <div class="first">
+  <h1>Uploaded</h1>
+  
+      <form id="uploadForm" enctype="multipart/form-data">
+          <input type="file" name="fileInput" id="fileInput">
+          <button type="submit">Upload</button>
+        </form>
+        <div id="fileList"></div>
+  </div>
+
+<div class="second">
+<h1>Uploaded Files</h1>
+
+<div id="showlist"></div>
+</div>
+
+
+<script >
+
+document.addEventListener("DOMContentLoaded", function() {
+  const uploadForm = document.getElementById("uploadForm");
+  const fileListDiv = document.getElementById("fileList");
+
+  // Submit form event listener
+  uploadForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const formData = new FormData(uploadForm);
+    
+    // Make a POST request to upload the file
+    fetch("/upload", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(file => {
+      // Display file details after successful upload
+      const fileItem = document.createElement('div');
+      fileItem.textContent = `File Name: ${file.name}, Size: ${file.size} bytes`;
+      fileListDiv.appendChild(fileItem);
+    })
+    .catch(error => {
+      console.error('Error uploading file:', error);
+    });
+  });
+});
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+  const fileListDiv = document.getElementById("showlist");
+
+  // Function to fetch and display files
+  function fetchAndDisplayFiles() {
+    // Fetch files from the server
+    fetch('/files')
+      .then(response => response.json())
+      .then(files => {
+        // Clear existing file list
+        fileListDiv.innerHTML = '';
+
+        // Display each file in the list
+        files.forEach(file => {
+          const fileItem = document.createElement('li');
+         // fileItem.textContent = file;
+
+          // Add a file icon using Font Awesome (or another icon library)
+          const fileIcon = document.createElement('i');
+              fileIcon.classList.add('fas', 'fa-file'); // Font Awesome classes for file icon
+              fileItem.appendChild(fileIcon);
+
+              fileItem.textContent = file;
+
+          // Add a delete button for each file
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.addEventListener('click', function() {
+            deleteFile(file);
+          });
+
+          // Append file name and delete button to the list
+          fileItem.appendChild(deleteButton);
+          fileListDiv.appendChild(fileItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching files:', error);
+      });
+  }
+
+  // Initial fetch and display of files
+  fetchAndDisplayFiles();
+
+  // Function to delete file
+  function deleteFile(filename) {
+    // Send a request to the server to delete the file
+    fetch(`/delete/${filename}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        // File deleted successfully, fetch and display updated files
+        fetchAndDisplayFiles();
+      } else {
+        // Handle error
+        console.error('Error deleting file:', response.statusText);
+      }
+    })
+    .catch(error => {
+      console.error('Error deleting file:', error);
+    });
+  }
+});
+
+</script>
+</body>
+</html>

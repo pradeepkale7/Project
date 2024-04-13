@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Event</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    label, input, select {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add Event</h1>
+  <form id="addEventForm">
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" name="eventName" required>
+
+    <label for="eventType">Event Type:</label>
+    <select id="eventType" name="eventType" required>
+      <option value="Meeting">Meeting</option>
+      <option value="Conference">Conference</option>
+      <option value="Seminar">Seminar</option>
+      <option value="Workshop">Workshop</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="startTime">Start Time:</label>
+    <input type="datetime-local" id="startTime" name="startTime" required>
+
+    <label for="endTime">End Time:</label>
+    <input type="datetime-local" id="endTime" name="endTime" required>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" required></textarea>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+      <option value="Scheduled">Scheduled</option>
+      <option value="Cancelled">Cancelled</option>
+      <option value="Completed">Completed</option>
+      <option value="Postponed">Postponed</option>
+    </select>
+
+    <input type="submit" value="Add Event">
+  </form>
+
+  <script>
+    // JavaScript code to handle form submission goes here...
+  </script>
+</body>
+</html>

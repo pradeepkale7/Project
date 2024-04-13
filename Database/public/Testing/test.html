@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    label, input[type="submit"] {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Document</h1>
+  <form action="/upload" method="POST" id="uploadDocumentForm" enctype="multipart/form-data">
+    <label for="documentName">Document Name:</label>
+    <input type="text" id="documentName" name="documentName" required>
+
+    <label for="document">Select Document:</label>
+    <input type="file" id="document" name="document" accept=".pdf,.doc,.docx,.txt" required>
+
+    <label for="eventID">Event ID</label>
+    <input type="number" id="eventID" name="eventID" >
+    <input type="hidden" id="uploadedBy " name="uploadedBy " > <!-- Replace "1" with the actual user ID -->
+    
+    <br>
+    <br>
+    <button id="uploadButton" type="submit">Upload Document </button>
+
+  </form>
+</body>
+<script>
+    const uploadButton = document.getElementById('uploadButton');
+  const uploadForm = document.getElementById('uploadDocumentForm');
+
+  uploadForm.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(uploadForm); // Create form data
+    const response = await fetch('/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.ok) { // Check for successful response (200 status code)
+      alert('Document uploaded successfully!');
+      window.location.reload(true); // Reload the page
+    } else {
+      alert('Error uploading document. Please try again.');
+    }
+  });
+
+</script>
+</html>
